@@ -34,8 +34,8 @@
 
             var emailForm = document.getElementById('email').value;
 
-            if (/\S+@\S+\.\S+/.test(emailForm) == false)
-                e.preventDefault(); {
+            if (/\S+@\S+\.\S+/.test(emailForm) == false) {
+                e.preventDefault();
                 alert('이메일형식아님');
 
             }
@@ -60,20 +60,41 @@
 
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand">MB</span>
+            <span class="navbar-brand">MB Shop</span>
             <span class="badge bg-dark">Dark 🔄</span>
             <button class="navbar-toggler" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
+        <div class="adv"></div>
     </nav>
+    <script>
+        $(window).on('scroll', function() {
+                    var fontSize = $(window).scrollTop();
+                    console.log(fontSize);
+            
+                    if (fontSize >= 100) {
+                        $('.navbar-brand').css({
+                            'font-size': '20px'
+                        });
+                    }
+
+                    if (fontSize < 100) {
+                        $('.navbar-brand').css({
+                            'font-size': '30px'
+                        });
+                    }
+
+                    $('.adv').width(fontSize);
+
+    </script>
+
 
     <script>
         var count = 0;
 
         document.querySelector('.badge').addEventListener('click', function() {
             count++;
-            console.log(count)
             if (count % 2 == 1) {
                 document.querySelector('.badge').innerHTML = 'Light 🔄'
                 $('body').removeClass('dark')
@@ -84,7 +105,6 @@
         })
 
     </script>
-
     <ul class="list-group">
         <li class="list-group-item">An item</li>
         <li class="list-group-item">A second item</li>
@@ -98,20 +118,50 @@
         <button id="login" class="btn btn-danger">로그인</button>
     </div>
 
+
+
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
+    </div>
+
+    <script>
+        //        div의 스크롤바 내린양  + 지금 화면에 보이는 div 높이 == div의 실제 높이
+        //        오차가 발생할 수 있으니 여유를 두고 비교를 해라 
+        $('.lorem').on('scroll', function() {
+            var scrAmount = document.querySelector('.lorem').scrollTop;
+            var scrHeight = document.querySelector('.lorem').scrollHeight;
+            var diVisible = document.querySelector('.lorem').clientHeight;
+
+            var total = scrAmount + diVisible;
+            console.log(total);
+
+            if (scrAmount + diVisible > scrHeight - 5) {
+                alert('끝');
+            }
+        });
+
+        document.querySelector('html').scrollHeight;
+        //        document.documentElement.scrollHeight
+        window.scrollY
+        document.querySelector('html').clientHeight;
+
+    </script>
+    <div style="height: 1000px"></div>
+
     <script>
         $('#login').on('click', function() {
             $('.black-bg').addClass('show-modal');
 
-        })
+        });
 
         $('#close').on('click', function() {
             $('.black-bg').removeClass('show-modal');
 
-        })
+        });
 
         document.querySelector('.navbar-toggler').addEventListener('click', function() {
             document.querySelectorAll('.list-group')[0].classList.toggle('show');
-        })
+        });
 
     </script>
     <div style="overflow: hidden">
@@ -142,7 +192,7 @@
         $('.next').on('click', function() {
             $('.slide-container').css('transform', 'translateX(-' + photo + '00vw)');
             photo += 1;
-            
+
         });
 
         $('.pre').on('click', function() {
@@ -164,6 +214,7 @@
         $('.slide-3').on('click', function() {
             $('.slide-container').css('transform', 'translateX(-200vw)');
         })
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
