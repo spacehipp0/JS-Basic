@@ -13,6 +13,50 @@
 </head>
 
 <body>
+
+    <div class="container mt-3">
+        <div class="card p-3">
+            <span id="carName">상품명</span>
+            <span id="carPrice">가격</span>
+        </div>
+    </div>
+
+
+    <script>
+        var car = ['소나타', 50000, 'white'];
+        car[0] = '아반떼';
+        car[3] = 'Korea'
+        console.log(car);
+        console.log(car[0]);
+
+        var car2 = {
+            name: '아반떼',
+            price: [55000, 30000, 40000], // Object안에 Array도 들어갈 수 있음
+            color: 'red'
+        }
+        console.log(car2.color);
+        car2.color = 'blue';
+        console.log(car2.color);
+        // 중괄호(object 자료형)는 변수(value)에 이름(key)를 붙여야함.
+
+        /* 
+        array와 object의 차이점 = array는 순서가 존재, object는 순서개념 없음
+        
+        순서가 있으면 자료간 정렬, 슬라이싱 가능 car.sort(); , car.slice(1, 3), 맨뒤, 앞 추가가능 ㄴ
+        */
+
+        //숙제
+
+        $('#carName').html(car2.name);
+        $('#carPrice').html(car2.price[0]);
+        
+//        document.querySelector('#carName').innerHTML = car2.name;
+    </script>
+
+
+
+
+
     <style>
         ul.list {
             list-style-type: none;
@@ -73,13 +117,13 @@
             <p>배송정보입니다. Shipping</p>
         </div>
     </div>
-    
-    
+
+
     <script src="../JS/for.js">
-        
-    
-    
-    
+
+
+
+
     </script>
 
 
