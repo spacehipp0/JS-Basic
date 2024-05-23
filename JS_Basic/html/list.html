@@ -58,25 +58,78 @@
                 title: 'Black Monastery'
             }
         ];
-        
-        for ( var i = 0; i < 3; i++) {
+
+        for (var i = 0; i < 3; i++) {
             $('.productName').eq(i).html(products[i].title);
             $('.productPrice').eq(i).html("가격 : " + products[i].price);
-            
+
             /* document.querySelectorAll('.card-body h5')[0].innerHTML = products[0].title; -- 굳이 클래스명 만들기 싫을 때 이렇게 사용
             '.card-body h5' --> 여기서 띄어쓰기는 자식요소를 선택하는 것
             */
         }
-        
-        
+
+
         console.log($('.productName').eq(1).text());
         console.log($('.productName').eq(2).text());
-        
+
         var a = '닥쳐';
-        
+
         console.log(`제발 ${a} 제발`);
     </script>
 
+
+    <form class="container my-5 form-group">
+        <p>상품선택</p>
+        <select class="form-select mt-2">
+            <option>모자</option>
+            <option id="shirt">셔츠</option>
+            <option>바지</option>
+        </select>
+        <select class="form-select mt-2 shirtBox">
+        </select>
+    </form>
+
+
+    <div id="test">
+
+
+    </div>
+
+    <script>
+        var a = document.createElement('p');
+        a.innerHTML = '안녕';
+        document.querySelector('#test').appendChild(a);
+
+        var template = '<p>hello<p>';
+        document.querySelector('#test').insertAdjacentHTML('beforeend', template);
+        $('#test').append(template);
+        // insertAdjacentHTML과 append 는 추가해주는 문법 (제일 하단에 추가해줌)
+        //만약 그냥 다 갈아치우길 원하면 innerHTML, html로
+
+        // inpiut 이벤트 리스너는 유저가 input값 변경할 땨 input이벤트 발동
+
+
+        $('.form-select').eq(0).on('input', function() {
+
+            var value = $('.form-select').eq(0).val();
+            if (value == '셔츠') {
+                $('.form-select').eq(1).removeClass('shirtBox');
+                var shirtsSize = `<option>90</option><option>95</option><option>100</option>`;
+                $('.form-select').eq(1).html(shirtsSize);
+            }
+
+            if (value == "모자") {
+                $('.form-select').eq(1).addClass('shirtBox');
+            }
+
+            if (value == '바지') {
+                $('.form-select').eq(1).removeClass('shirtBox');
+
+                var pantsSize = `<option>28</option><option>30</option><option>32</option>`;
+                $('.form-select').eq(1).html(pantsSize);
+            }
+        });
+    </script>
 
 
 
