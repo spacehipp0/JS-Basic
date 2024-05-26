@@ -38,10 +38,6 @@
         ]
 
 
-
-
-
-
         function products_box(b) {
             b.forEach((a, i) => {
                 var material = `<div class="col-sm-4 colBox"><img src="https://via.placeholder.com/600" class="w-100"><h5>${b[i].title}</h5><p>가격은 ${b[i].price} 입니다.</p></div>`;
@@ -62,6 +58,30 @@
     <div class="container my-3">
         <button class=" btn btn-danger" id='price'>가격순정렬</button>
     </div>
+    <div class="container my-3">
+        <button class=" btn btn-danger" id='ganada'>가나다순정렬</button>
+    </div>
+
+    <div class="container my-3">
+        <button class=" btn btn-danger" id='danaga'>다나가순정렬</button>
+    </div>
+
+    <div class="container my-3">
+        <button class=" btn btn-danger" id='6man'>6만원 이하 상품 보기</button>
+    </div>
+    
+    <div class="container my-3">
+        <input type="number" id="range">
+        <button class=" btn btn-danger" id='detail'>입력
+        </button>
+    </div>
+    
+    <div class="container my-3">
+        <button class=" btn btn-danger" id='back'>도르마무</button>
+    </div>
+
+
+
 
     <script>
         //더보기 버튼 누르면 상품 3개 가져와서 출력하기, 
@@ -115,6 +135,9 @@
                 title: 'Black Monastery'
             }
         ]
+        
+        
+        var origin = products.slice();
 
         $('#price').click(function() {
             products.sort(function(a, b) {
@@ -125,15 +148,85 @@
 
             products_box(products);
 
+        });
+
+        $('#danaga').click(function(a, b) {
+            products.sort(function(a, b) {
+                if (a.title < b.title) {
+                    return 1
+
+                } else {
+                    return -1
+                }
+            });
+
+
+            $('.row').html('');
+
+            products_box(products);
 
         });
+
+        $('#ganada').click(function(a, b) {
+            products.sort(function(a, b) {
+                if (b.title < a.title) {
+                    return 1
+
+                } else {
+                    return -1
+                }
+            });
+
+            $('.row').html('');
+
+            products_box(products);
+
+        });
+
+        $('#6man').click(function(a, b) {
+            var yuk = products.filter(function(a) {
+                return a.price <= 60000
+            })
+            // var newProduct = products.filter(a => a.price <= 60000);도 가능
+            $('.row').html('');
+
+            products_box(yuk);
+
+        });
+        
+        $('#detail').click(function() {
+            var detail = products.filter(function(a) {
+                return a.price <= Number($('#range').val())
+            })  //$('#range').val()은 문자열로 저장됨
+            console.log(detail);
+            $('.row').html('');
+
+            products_box(detail);
+
+        });
+        
+        
+        $('#back').click(function() {
+            $('.row').html('');
+            products_box(origin);
+        })
     </script>
 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     <script>
         //정렬하는 법
 
         var 어레이 = [1, 3, 2, 0, -1, 8];
-        var 어레이2 = ['a', 'd', 'b'];
+        var 어레이2 = ['a', 'g', 'b'];
 
         어레이2.sort();
 
@@ -149,30 +242,29 @@
         // 원리? --> return 옆의 변수가 양수면 a를 오른쪽으로, 음수면 b를 오른쪽으로
         // 따라서 큰 숫자일수록 오른쪽으로 밀림 역순이면 b - a로 하면 되겠지
 
-        console.log(어레이);
-        console.log(어레이2);
-        
+    
+
         //필터함수 
-        
+
         var 새어레이 = 어레이.filter(function(a) {
             return a < 4 // 4미만인 숫자들만 출력 
         }); // filter() 결과는 변수에 저장해서 써야한다
 
-        console.log(어레이);
-        console.log(새어레이);
-        
-        
+    
+
+
         // sort는 원본을 수정하지만 filter는 원본을 건드리지 않는다.
-        
-        
+
+
         //map 함수 array자료 모두 번형함
         var 맵어레이 = 어레이.map(function(a) {
             return a * 4 // 모든 원소에 4씩 곱한다
         }); // map() 결과는 변수에 저장해서 써야한다
 
-        
-        
-        
+        var 다나가 = ['bad', 'fire', 'orange', 'apple'];
+
+        다나가.sort()
+
     </script>
 
 
