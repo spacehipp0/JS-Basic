@@ -35,17 +35,149 @@
                 price: 60000,
                 title: 'Black Monastery'
             }
-        ];
+        ]
 
-        products.forEach((a, i) => {
-            var material = `<div class="col-sm-4 colBox"><img src="https://via.placeholder.com/600" class="w-100"><h5>${products[i].title}</h5><p>가격은 ${products[i].price} 입니다.</p></div>`;
-            $('.row').append(material);
-        })
 
+
+
+
+
+        function products_box(b) {
+            b.forEach((a, i) => {
+                var material = `<div class="col-sm-4 colBox"><img src="https://via.placeholder.com/600" class="w-100"><h5>${b[i].title}</h5><p>가격은 ${b[i].price} 입니다.</p></div>`;
+                $('.row').append(material);
+            });
+
+        }
+        //함수를 이용하여 박스 생성
+        products_box(products);
     </script>
+
+
+    <div class="container">
+        <button class=" btn btn-danger" id='more'>더보기</button>
+    </div>
+
+
+    <div class="container my-3">
+        <button class=" btn btn-danger" id='price'>가격순정렬</button>
+    </div>
+
+    <script>
+        //더보기 버튼 누르면 상품 3개 가져와서 출력하기, 
+        var count = 0;
+
+        $('#more').on('click', function() {
+
+            count++;
+
+            if (count < 2) {
+
+                $.get('https://codingapple1.github.io/js/more1.json')
+                    .done(function(data) {
+
+                        var products_2 = data;
+
+                        products_box(products_2);
+                    });
+            } else {
+
+                $.get('https://codingapple1.github.io/js/more2.json')
+                    .done(function(data) {
+
+                        var products_3 = data;
+
+                        products_box(products_3);
+                    });
+                $('#more').css('display', 'none');
+
+            }
+
+        });
+    </script>
+
+
+
+    <script>
+        var products = [{
+                id: 0,
+                price: 70000,
+                title: 'Blossom Dress'
+            },
+            {
+                id: 1,
+                price: 50000,
+                title: 'Springfield Shirt'
+            },
+            {
+                id: 2,
+                price: 60000,
+                title: 'Black Monastery'
+            }
+        ]
+
+        $('#price').click(function() {
+            products.sort(function(a, b) {
+                return a.price - b.price
+            });
+
+            $('.row').html('');
+
+            products_box(products);
+
+
+        });
+    </script>
+
+    <script>
+        //정렬하는 법
+
+        var 어레이 = [1, 3, 2, 0, -1, 8];
+        var 어레이2 = ['a', 'd', 'b'];
+
+        어레이2.sort();
+
+
+        어레이.sort(function(a, b) {
+            return a - b
+
+        }); // 그냥 sort()를 쓰면 문자정렬, 숫자로 하려면 function 붙여야함
+        어레이2.sort(function(a, b) {
+            return b - a
+
+        });
+        // 원리? --> return 옆의 변수가 양수면 a를 오른쪽으로, 음수면 b를 오른쪽으로
+        // 따라서 큰 숫자일수록 오른쪽으로 밀림 역순이면 b - a로 하면 되겠지
+
+        console.log(어레이);
+        console.log(어레이2);
+        
+        //필터함수 
+        
+        var 새어레이 = 어레이.filter(function(a) {
+            return a < 4 // 4미만인 숫자들만 출력 
+        }); // filter() 결과는 변수에 저장해서 써야한다
+
+        console.log(어레이);
+        console.log(새어레이);
+        
+        
+        // sort는 원본을 수정하지만 filter는 원본을 건드리지 않는다.
+        
+        
+        //map 함수 array자료 모두 번형함
+        var 맵어레이 = 어레이.map(function(a) {
+            return a * 4 // 모든 원소에 4씩 곱한다
+        }); // map() 결과는 변수에 저장해서 써야한다
+
+        
+        
+        
+    </script>
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-</body>
-
-</html>
+</body></html>
