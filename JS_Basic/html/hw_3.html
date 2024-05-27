@@ -35,22 +35,36 @@
                 price: 60000,
                 title: 'Black Monastery'
             }
-        ]
+        ];
+
 
 
         function products_box(b) {
             b.forEach((a, i) => {
-                var material = `<div class="col-sm-4 colBox"><img src="https://via.placeholder.com/600" class="w-100"><h5>${b[i].title}</h5><p>가격은 ${b[i].price} 입니다.</p></div>`;
+                var material = `<div class="col-sm-4 colBox"><img src="https://via.placeholder.com/600" class="w-100"><h5 class="name">${b[i].title}</h5><p>가격은 ${b[i].price} 입니다.</p><button class="buy">구매</button></div>`;
                 $('.row').append(material);
             });
 
         }
         //함수를 이용하여 박스 생성
         products_box(products);
+
+        // local storage에 저장하는 방법
+        var arr = [1, 2, 3];
+        var newArr = JSON.stringify(arr);
+
+        localStorage.setItem('number', newArr);
+
+        var 꺼낸거 = localStorage.getItem('number');
+        console.log(JSON.parse(꺼낸거)[0]);
+
+        // Session Storage는 그냥 local에서 session으로 바꾸면 됨
+        // 수정시, 1.자료꺼냄, 2.꺼낸거 수정함 3.다시 넣음
+
     </script>
 
 
-    <div class="container">
+    <div class="container mt-4">
         <button class=" btn btn-danger" id='more'>더보기</button>
     </div>
 
@@ -69,13 +83,13 @@
     <div class="container my-3">
         <button class=" btn btn-danger" id='6man'>6만원 이하 상품 보기</button>
     </div>
-    
+
     <div class="container my-3">
         <input type="number" id="range">
         <button class=" btn btn-danger" id='detail'>입력
         </button>
     </div>
-    
+
     <div class="container my-3">
         <button class=" btn btn-danger" id='back'>도르마무</button>
     </div>
@@ -114,6 +128,7 @@
             }
 
         });
+
     </script>
 
 
@@ -135,8 +150,8 @@
                 title: 'Black Monastery'
             }
         ]
-        
-        
+
+
         var origin = products.slice();
 
         $('#price').click(function() {
@@ -193,35 +208,52 @@
             products_box(yuk);
 
         });
-        
+
         $('#detail').click(function() {
             var detail = products.filter(function(a) {
                 return a.price <= Number($('#range').val())
-            })  //$('#range').val()은 문자열로 저장됨
+            }) //$('#range').val()은 문자열로 저장됨
             console.log(detail);
             $('.row').html('');
 
             products_box(detail);
 
         });
-        
-        
+
+
         $('#back').click(function() {
             $('.row').html('');
             products_box(origin);
         })
+
     </script>
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
+
+    <script>
+        var firstProduct = 0;
+        $('.buy').click(function(e) {
+            var name = [$(e.target).siblings('h5').text()]
+            var newName = JSON.stringify(name);
+            localStorage.setItem('cart', newName);
+            firstProduct++
+
+            var addItem = localStorage.getItem('cart');
+            addItem = JSON.parse(addItem);
+            
+            addItem.push($(e.target).siblings('h5').text());
+            var name = JSON.stringify(addItem);
+            console.log(addItem);
+
+        })
+
+    </script>
+
+
+
+
+
+
     <script>
         //정렬하는 법
 
@@ -242,7 +274,7 @@
         // 원리? --> return 옆의 변수가 양수면 a를 오른쪽으로, 음수면 b를 오른쪽으로
         // 따라서 큰 숫자일수록 오른쪽으로 밀림 역순이면 b - a로 하면 되겠지
 
-    
+
 
         //필터함수 
 
@@ -250,7 +282,7 @@
             return a < 4 // 4미만인 숫자들만 출력 
         }); // filter() 결과는 변수에 저장해서 써야한다
 
-    
+
 
 
         // sort는 원본을 수정하지만 filter는 원본을 건드리지 않는다.
@@ -272,4 +304,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-</body></html>
+</body>
+
+</html>
