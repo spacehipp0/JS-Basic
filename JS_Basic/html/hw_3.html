@@ -231,21 +231,24 @@
 
 
     <script>
-        var firstProduct = 0;
+
         $('.buy').click(function(e) {
-            var name = [$(e.target).siblings('h5').text()]
-            var newName = JSON.stringify(name);
-            localStorage.setItem('cart', newName);
-            firstProduct++
-
-            var addItem = localStorage.getItem('cart');
-            addItem = JSON.parse(addItem);
-            
-            addItem.push($(e.target).siblings('h5').text());
-            var name = JSON.stringify(addItem);
-            console.log(addItem);
-
-        })
+            if (localStorage.getItem('cart') == null) {
+                
+                var name = [$(e.target).siblings('h5').text()]
+                
+                localStorage.setItem('cart', JSON.stringify(name));
+                
+                
+            } else {
+                var addItem = localStorage.getItem('cart')
+                var newCart = JSON.parse(addItem);
+                
+                newCart.push($(e.target).siblings('h5').text());
+                
+                localStorage.setItem('cart', JSON.stringify(newCart));
+            }
+        });
 
     </script>
 
