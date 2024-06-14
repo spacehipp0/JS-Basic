@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Switch</title>
+</head>
+
+<body>
+    <div id='quiz'>
+        <h4>물에 빠지면 누구 먼저 구할 것인가?</h4>
+        <button>와이프</button>
+        <button>부모님</button>
+        <button>애완동물</button>
+    </div>
+    <script>
+        let 변수 = 2 + 2;
+
+        switch (변수) {
+
+            case 3:
+                alert('변수가 3이네요');
+                break;
+
+            case 5:
+                alert('변수가 4이네요');
+                break;
+
+            default: //else와 비슷, 위에 변수가 case들에 충족하지 않을 시
+                //alert('없음');
+
+        }
+        // switch는 변수 1개만 테스트 가능 (그냥 깔끔해 보이고 싶을 때 if 대신 쓰이는 정도) +
+        // 변수 하나만 검사할 때 간편하게 사용 가능
+    </script>
+
+    <script>
+       document.querySelector('#quiz').addEventListener('click', function(e) {
+         switch(e.target.innerHTML){
+             case '와이프': 
+                 alert('와이프가 가장 중요하군요');
+                 break;
+                 
+             case '부모님':
+                 alert('부모님이 가장 중요하군요');
+                 break
+             case '애완동물': // 문자는 '' 붙이는 것 까먹지 말자
+                 alert('진짜입니까?');
+                 break
+         }
+       });
+ 
+    </script>
+
+
+</body></html>
